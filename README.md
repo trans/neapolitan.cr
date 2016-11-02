@@ -1,8 +1,8 @@
 # Neapolitan
 
-{Homepage}[http://trans.github.com/neapolitan.cr/] |
-{Development}[http://github.com/trans/neapolitan.cr] |
-{Report Issue}[http://github.com/trans/neapolitan.cr/issues] |
+[Homepage](http://trans.github.com/neapolitan.cr/) |
+[Development](http://github.com/trans/neapolitan.cr) |
+[Report Issue](http://github.com/trans/neapolitan.cr/issues) |
 
 ## DESCRIPTION
 
@@ -72,7 +72,7 @@ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
 PURPOSE.
 
 
-{<img src="http://travis-ci.org/trans/neapolitan.png" />}[http://travis-ci.org/trans/neapolitan]
+[<img src="http://travis-ci.org/trans/neapolitan.png" />](http://travis-ci.org/trans/neapolitan)
 
 
 
