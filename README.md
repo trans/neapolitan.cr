@@ -2,7 +2,7 @@
 
 [Homepage](http://trans.github.com/neapolitan.cr/) |
 [Development](http://github.com/trans/neapolitan.cr) |
-[Report Issue](http://github.com/trans/neapolitan.cr/issues) |
+[Report Issue](http://github.com/trans/neapolitan.cr/issues)
 
 ## DESCRIPTION
 
