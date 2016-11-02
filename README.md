@@ -15,7 +15,7 @@ you a whole box to pick from.
 
 * All the variety of a Whitman's Sampler.
 * And all the ease of a Hershey's K.I.S.S.
-* Website uses pretty colors ;)
+* Our website has pretty colors :smile:
 
 
 ## Usage
@@ -36,7 +36,7 @@ Add this to your application's `shard.yml`:
 ```yaml
 dependencies:
   neapolitan:
-    github: [your-github-name]/neapolitan
+    github: trans/neapolitan.cr
 ```
 
 
@@ -48,7 +48,7 @@ this project's Github issues.
 
 ## Contributing
 
-1. Fork it ( https://github.com/[your-github-name]/neapolitan/fork )
+1. Fork it ( https://github.com/trans/neapolitan.cr/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)
@@ -57,7 +57,7 @@ this project's Github issues.
 
 ## Contributors
 
-- trans(https://github.com/[your-github-name]) - creator, maintainer
+- [trans](https://github.com/trans) - creator, maintainer
 
 
 ## Copyrights
