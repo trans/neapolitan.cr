@@ -22,12 +22,41 @@ you a whole box to pick from.
 
 ## Usage
 
+Here's a very simple example of Neapolitan markup.
+
+```neapolitan
+--- !metadata
+name: World
+--- !markdown
+Hello {{name}}!
+```
+
+Library usage:
+
 
 ```crystal
 require "neapolitan"
 
 Neapolitan.render(io_or_string)
 ```
+
+## Compatability
+
+Neapolitan has a little bitty bit of brains to make static blog writers
+life easier. If your Neapolitan markup does not provide tags, the library
+will take a smart guess at the content. That means traditional Jekyll
+style posts/pages with YAML from matter followed by Markdown text will
+work!
+
+
+```neapolitan
+---
+name: World
+---
+Hello {{name}}!
+```
+
+This will work just like the prior example.
 
 
 ## Installation
