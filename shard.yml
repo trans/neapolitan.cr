@@ -1,0 +1,11 @@
+name: neapolitan
+version: 0.1.0
+
+dependencies:
+  crustache:
+      github: MakeNowJust/crustache
+
+authors:
+  - trans <transfire@gmail.com>
+
+license: MIT
