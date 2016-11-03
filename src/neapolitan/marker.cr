@@ -86,18 +86,31 @@ module Neapolitan
     end
 
     #
-    # Because YAML doesn't support strings that aren't indeneted.
+    # This preprocessor does two things.
+    #
+    # 1. Because YAML doesn't support root strings that are not indented,
+    #    this routiune adds two spaces of indention to every line other
+    #    than document separater lines (`---` and `...`).
+    #
+    # 2. By default block strings are flow style which means one new line
+    #    character is lost when blank lines are encountered. We correct this
+    #    by making the default literal instead by adding `|` to `---` lines.
+    #
+    # TODO: To be fully compliant with spec we may need to consider %TAG lines
+    #       when indenting.
     #
     private def prep(text : String)
       build = Array(String).new
       text.each_line do |line|
         if line.starts_with?("---")
+          if line !~ /([|>]\d*\s*$/
+            build << line.strip + " |\n"
+        elsif line.starts_with?("...")
           build << line
         else
           build << "  " + line
         end
       end
-puts build.join
       build.join
     end
   end
