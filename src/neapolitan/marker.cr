@@ -97,6 +97,7 @@ module Neapolitan
           build << "  " + line
         end
       end
+puts build.join
       build.join
     end
   end
