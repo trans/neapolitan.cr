@@ -9,7 +9,13 @@ module Neapolitan
     # form of String or IO.
     #
     def initialize(content : String | IO)
-      @content = content
+      if content.is_a? String
+        text = content
+      else
+        text = content.read
+      end
+
+      @content = prep(text)
 
       # this will just be replaced, but we have to initialize it
       @data = Hash(String, YAML::Type).new
@@ -79,6 +85,20 @@ module Neapolitan
      	Crustache.render(template, data)
     end
 
+    #
+    # Because YAML doesn't support strings that aren't indeneted.
+    #
+    private def prep(text : String)
+      build = Array(String).new
+      text.each_line do |line|
+        if line.starts_with?("---")
+          build << line
+        else
+          build << "  " + line
+        end
+      end
+      build.join
+    end
   end
 
 end
