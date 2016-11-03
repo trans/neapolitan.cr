@@ -103,7 +103,7 @@ module Neapolitan
       build = Array(String).new
       text.each_line do |line|
         if line.starts_with?("---")
-          if line !~ /([|>]\d*\s*$/
+          if line !~ /[|>]\d*\s*$/
             build << line.strip + " |\n"
         elsif line.starts_with?("...")
           build << line
