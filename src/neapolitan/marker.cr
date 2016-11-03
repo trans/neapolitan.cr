@@ -12,7 +12,7 @@ module Neapolitan
       if content.is_a? String
         text = content
       else
-        text = content.read
+        text = content.gets_to_end
       end
 
       @content = prep(text)
