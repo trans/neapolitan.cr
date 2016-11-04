@@ -30,7 +30,7 @@ module Neapolitan
 
     #
     # If the tag is empty or nil, this routine makes an educated guess
-    # as to wha the tag ought to be.
+    # as to what the tag ought to be.
     #
     def guess_type(value : YAML::Type)
       case value
@@ -40,8 +40,8 @@ module Neapolitan
           "html"
         elsif text.starts_with?("#")
           "markdown"
-        #elsif text =~ /\A\w+\:/
-        #  "metadata"
+        elsif text =~ /\A\s*\w+\:/
+          "metadata"
         else
           "markdown"
         end

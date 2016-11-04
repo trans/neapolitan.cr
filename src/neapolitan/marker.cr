@@ -1,5 +1,10 @@
 module Neapolitan
 
+  ##
+  # Marker is the main class used to render neapoltian markup.
+  # It interfaces with a parser which produces an array of sections.
+  # It then takes the sections and generates the final output.
+  #
   class Marker
     @content : String | IO
     @data : Hash(String, YAML::Type)
@@ -9,13 +14,7 @@ module Neapolitan
     # form of String or IO.
     #
     def initialize(content : String | IO)
-      if content.is_a? String
-        text = content
-      else
-        text = content.gets_to_end
-      end
-
-      @content = prep(text)
+      @content = content
 
       # this will just be replaced, but we have to initialize it
       @data = Hash(String, YAML::Type).new
@@ -26,7 +25,8 @@ module Neapolitan
     #
     def render
       sections = Array(Section).new
-      parser = PullParser.new(@content)
+      #parser = PullParser.new(@content)
+      parser = NaiveParser.new(@content)
       parser.parse
       render_sections(parser.sections)
     end
@@ -83,37 +83,6 @@ module Neapolitan
     private def mustache(text, data)
       template = Crustache.parse(text)
      	Crustache.render(template, data)
-    end
-
-    #
-    # This preprocessor does two things.
-    #
-    # 1. Because YAML doesn't support root strings that are not indented,
-    #    this routiune adds two spaces of indention to every line other
-    #    than document separater lines (`---` and `...`).
-    #
-    # 2. By default block strings are flow style which means one new line
-    #    character is lost when blank lines are encountered. We correct this
-    #    by making the default literal instead by adding `|` to `---` lines.
-    #
-    # TODO: To be fully compliant with spec we may need to consider %TAG lines
-    #       when indenting.
-    #
-    private def prep(text : String)
-      build = Array(String).new
-      text.each_line do |line|
-        if line.starts_with?("---")
-          build << line
-        elsif line.starts_with?("...")
-          build << line
-        elsif line.strip.empty?
-          build << line
-          build << line
-        else
-          build << "  " + line
-        end
-      end
-      build.join
     end
 
   end

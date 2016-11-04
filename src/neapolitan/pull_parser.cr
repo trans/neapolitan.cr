@@ -8,7 +8,14 @@ module Neapolitan
     getter sections
 
 		def initialize(content : String | IO)
-		  @pull_parser = YAML::PullParser.new(content)
+      # unfortunately we have to convert to a string to do prep
+      if content.is_a? String
+        text = content
+      else
+        text = content.gets_to_end
+      end
+
+		  @pull_parser = YAML::PullParser.new(prep(text))
 		  @anchors = {} of String => YAML::Type
 
 		  @sections = [] of Section #YAML::Any
@@ -121,6 +128,39 @@ module Neapolitan
 		private def raise(msg)
 		  ::raise YAML::ParseException.new(msg, @pull_parser.problem_line_number, @pull_parser.problem_column_number)
 		end
+
+    #
+    # This preprocessor does two things.
+    #
+    # 1. Because YAML doesn't support root strings that are not indented,
+    #    this routiune adds two spaces of indention to every line other
+    #    than document separater lines (`---` and `...`).
+    #
+    # 2. By default block strings are flow style which means one new line
+    #    character is lost when blank lines are encountered. We correct this
+    #    by making the default literal instead by adding `|` to `---` lines.
+    #
+    # TODO: To be fully compliant with spec we may need to consider %TAG lines
+    #       when indenting.
+    #
+    private def prep(text : String)
+      build = Array(String).new
+      text.each_line do |line|
+        if line.starts_with?("---")
+          build << line
+        elsif line.starts_with?("...")
+          build << line
+        elsif line.starts_with?("```")
+          build << line
+        elsif line.strip.empty?
+          build << line
+          build << line
+        else
+          build << "  " + line
+        end
+      end
+      build.join
+    end
 
 	end
 
